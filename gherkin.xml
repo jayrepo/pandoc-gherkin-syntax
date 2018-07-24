@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language SYSTEM "language.dtd">
+<language name="Gherkin" version="1.0" kateversion="2.4" section="Other" extensions="*.feature;*.FEATURE" mimetype="text/x-gherkin" casesensitive="1" author="jayrepo" license="GPL">
+  <highlighting>
+    <contexts>
+      <context  attribute="Normal Text" lineEndContext="#stay" name="normalText">
+        <DetectSpaces />
+        <RegExpr attribute="Keyword" context="feature" String="(Feature|Example|Scenario|Scenario Outline|Background|Combinations|Examples):" />
+        <RegExpr attribute="Keyword" context="step" String="(Given|When|Then|And|But)" />
+        <DetectChar attribute="Tag" char="@" firstNonSpace="true" context="tag" />
+        <DetectChar attribute="Keyword" char="|" firstNonSpace="true" context="table" />
+        <DetectChar attribute="Comment" context="comment" char="#" firstNonSpace="true" />
+        <StringDetect attribute="String" String="&quot;&quot;&quot;" context="multilinestring" />
+      </context>
+      <context attribute="Function" name="feature" lineEndContext="#pop">
+        <DetectSpaces attribute="Normal Text"/>
+      </context>
+      <context attribute="Normal Text" name="step" lineEndContext="#pop">
+        <Float attribute="Float" context="#stay"/>
+        <Int attribute="Decimal" context="#stay"/>
+        <RangeDetect char="&lt;" char1="&gt;" attribute="Placeholder" context="#stay" />
+        <RangeDetect char="'" char1="'" attribute="Placeholder" context="#stay" />
+        <RangeDetect char="&quot;" char1="&quot;" attribute="Placeholder" context="#stay" />
+      </context>
+      <context attribute="Tag" lineEndContext="#pop" name="tag" >
+        <DetectSpaces attribute="Normal Text"/>
+        <DetectChar attribute="Tag" char="@" context="tag" />
+      </context>
+      <context attribute="String" lineEndContext="#stay" name="multilinestring">
+        <StringDetect String="&quot;&quot;&quot;" attribute="String" context="#pop" />
+      </context>
+      <context attribute="Placeholder" lineEndContext="#pop" name="table">
+        <DetectSpaces attribute="Normal Text"/>
+        <RegExpr attribute="Placeholder" context="table" String="[^|\s]+"/>
+        <DetectChar char="|" attribute="Keyword" context="table" />
+      </context>
+      <context attribute="Comment" lineEndContext="#pop" name="comment" />
+
+    </contexts>
+    <itemDatas>
+      <itemData name="Tag"               defStyleNum="dsAnnotation"/>
+      <itemData name="Normal Text"       defStyleNum="dsNormal"/>
+      <itemData name="Keyword"           defStyleNum="dsKeyword"/>
+      <itemData name="Function"          defStyleNum="dsFunction"/>
+      <itemData name="Decimal"           defStyleNum="dsDecVal"/>
+      <itemData name="Float"             defStyleNum="dsFloat"/>
+      <itemData name="Placeholder"       defStyleNum="dsString"/>
+      <itemData name="String"            defStyleNum="dsString"/>
+      <itemData name="Comment"           defStyleNum="dsComment"/>
+    </itemDatas>
+  </highlighting>
+  <general>
+    <comments>
+      <comment name="singleLine" start="#"/>
+    </comments>
+    <keywords casesensitive="1" weakDeliminator=":"/>
+  </general>
+</language>
